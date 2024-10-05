@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const CategoriesScreen = () => {
+const CategoriesPage = () => {
   return (
     <View style={styles.container}>
       <Text>Categories Screen</Text>
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoriesScreen;
+export default CategoriesPage;

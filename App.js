@@ -1,41 +1,53 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./screens/HomeScreen";
-// import CategoriesScreen from "./screens/CategoriesScreen";
-// import ProfileScreen from "./screens/ProfileScreen";
-// import WishlistScreen from "./screens/WishlistScreen";
-import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons"; // Expo Icons
+
+// Import your screens
+import HomePage from "./screens/HomeScreen";
+import WishlistPage from "./screens/WishlistScreen";
+import CategoriesPage from "./screens/CategoriesScreen";
+import Notification from "./screens/NotificationScreen";
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ focused, color, size }) => {
             let iconName;
+
             if (route.name === "Home") {
-              iconName = "home";
+              iconName = focused ? "home" : "home-outline";
+            } else if (route.name === "Wishlist") {
+              iconName = focused ? "heart" : "heart-outline";
+            } else if (route.name === "Categories") {
+              iconName = focused ? "ticket" : "ticket-outline";
+            } else if (route.name === "Notification") {
+              iconName = focused ? "newspaper" : "newspaper-outline";
+            } else if (route.name === "Profile") {
+              iconName = focused ? "person" : "person-outline";
             }
-            // else if (route.name === "Categories") {
-            //   iconName = "grid";
-            // } else if (route.name === "Profile") {
-            //   iconName = "person";
-            // } else if (route.name === "Wishlist") {
-            //   iconName = "heart";
-            // }
+
+            // Return the icon component
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#ff6600",
-          tabBarInactiveTintColor: "gray",
         })}
+        tabBarOptions={{
+          activeTintColor: "#ff6600",
+          inactiveTintColor: "gray",
+        }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        {/* <Tab.Screen name="Categories" component={CategoriesScreen} />
-        <Tab.Screen name="Wishlist" component={WishlistScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} /> */}
+        <Tab.Screen name="Home" component={HomePage} />
+        <Tab.Screen name="Wishlist" component={WishlistPage} />
+        <Tab.Screen name="Categories" component={CategoriesPage} />
+        <Tab.Screen name="Notification" component={Notification} />
+        <Tab.Screen name="Profile" component={Notification} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
+
+export default App;
